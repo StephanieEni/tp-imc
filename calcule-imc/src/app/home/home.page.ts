@@ -7,6 +7,36 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  poids='';
+  taille='';
+  imc='';
+  color ='';
+  visible=true;
   constructor() {}
 
+  onCalculeIMC(){
+    let poids = parseFloat(this.poids);
+    let taille = parseFloat(this.taille);
+  
+    if(!isNaN(poids) && !isNaN(taille) ){
+      let calcule = parseFloat((poids/ (taille*taille)).toFixed(1));   
+      if (calcule <= 18.5){
+         this.imc = "Votre IMC : " + calcule+ " = maigreur";
+         this.color = 'warning';
+         this.visible=true;
+      }
+      else if (calcule <= 25){
+        this.imc =  "Votre IMC : " + calcule+ " = poids normal";
+        this.color = 'success';
+      }
+       else if (calcule >= 25){
+        this.imc =  "Votre IMC : " + calcule+ " = surpoids";
+        this.color = 'danger';      
+      }
+    } else{
+     this.imc= "Veillez entrer des chiffres correctes"
+     this.color = 'danger';
+     this.visible=true;
+    }
+  }
 }

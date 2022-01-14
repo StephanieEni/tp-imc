@@ -11,19 +11,18 @@ export class HomePage {
   taille='';
   imc='';
   color ='';
-  visible=true;
+  hidden=true;
   constructor() {}
 
   onCalculeIMC(){
     let poids = parseFloat(this.poids);
     let taille = parseFloat(this.taille);
-  
+    this.hidden=false;
     if(!isNaN(poids) && !isNaN(taille) ){
       let calcule = parseFloat((poids/ (taille*taille)).toFixed(1));   
       if (calcule <= 18.5){
          this.imc = "Votre IMC : " + calcule+ " = maigreur";
-         this.color = 'warning';
-         this.visible=true;
+         this.color = 'warning';      
       }
       else if (calcule <= 25){
         this.imc =  "Votre IMC : " + calcule+ " = poids normal";
@@ -36,7 +35,7 @@ export class HomePage {
     } else{
      this.imc= "Veillez entrer des chiffres correctes"
      this.color = 'danger';
-     this.visible=true;
+     this.hidden=false;
     }
   }
 }
